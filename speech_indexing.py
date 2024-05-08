@@ -1,36 +1,65 @@
 import spacy
-def extract_input(input_string):
-    nlp = spacy.load("en_core_web_sm")
-    doc = nlp(input_string)
-    lang = doc.lang_
+import re
+nlp = spacy.load("en_core_web_sm")
 
-    sentence = None
-    tgt_lang= None
 
+def detect_language(text):
+    supported_languages = ["marathi", "hindi", "french", "spanish", "german", "italian", "portuguese", "japanese", "korean", "russian", "arabic"]
+    for language in supported_languages:
+        if language in text.lower():
+            return language.capitalize()
+    return None
+
+def clean_text(text, language):
+    text = re.sub(rf'\b(?:translate|convert|translation)\b.*\b(into|to)\s+{language}\b', '', text, flags=re.IGNORECASE)
+    text = re.sub(rf'\b(into|to)\s+{language}\b', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\b(this sentence|of following sentence)\b', '', text, flags=re.IGNORECASE)
+    return text
+
+def extract_translation_info(sentence):
+    doc = nlp(sentence)
+    translate_index = None
     for token in doc:
-        if token.text.lower() in ["translate", "convert"]:
-            sentence = doc[token.i + 1:].text.strip()
+        if token.lemma_ == "translate" or token.lemma_ == "convert" or token.lemma_ == "translation":
+            translate_index = token.i
             break
 
-    # for ent in doc.ents:
-    #     if ent.label_ in ["language", "into"]:
-    #         tgt_lang = ent.text.lower()
-    #         break
 
+    language = detect_language(sentence)
+    if translate_index is not None and translate_index + 1 < len(doc):
+        command = "Translate"
+        
+        text_to_translate = ""
+        for token in doc[translate_index + 1:]:
+            text_to_translate += token.text + " "
+    else:
+        text_to_translate = ''
 
-    for token in doc:
-        if token.text.lower() in ["to", "into"]:
-            tgt_lang_candidate = doc[token.i+1]
-            if tgt_lang_candidate.pos_ in ["PROPN", "ADJ"]:
-                tgt_lang = tgt_lang_candidate.text.lower()
-                replacer =f"{doc[token.i]} {doc[token.i+1]}"
-                print(replacer)
-                break
-    
-    sentence1 = sentence.replace(replacer, "")
-    
-    return sentence1, tgt_lang
+    text_to_translate = clean_text(text_to_translate, language)
 
-sentence1, tgt_lang1 = extract_input("Translate this sentence into hindi So the pointers in C language are reference to some other variable. It is same as person A pointing to person B")
+    return {
+        'command': command,
+        'language': language,
+        'text_to_translate': text_to_translate.strip()
+    }
 
-print(f"Sentence 1: {sentence1}, Target language 1: {tgt_lang1}")
+# Testing examples
+sentences = [
+    "Please translate this sentence into Hindi In C language pointers serve as references to other variables, akin to person A pointing to person B",
+    "Translate this sentence into Hindi Pointers in C language function as references to other variables, much like person A indicating person B",
+    "Could you translate this sentence into Hindi Pointers within C programming act as references to other variables resembling person A gesturing towards person B",
+    "I'd like this sentence translated into Hindi The pointers in C language represent references to other variables similar to person A pointing towards person B",
+    "Kindly translate this sentence into Hindi Pointers in C resemble person A pointing to person B as they reference other variables",
+    "Translate I am going to school into French",
+    "Translate Hello to Hindi",
+    "Please do translation of following sentence into hindi In Chekki programming pointers are akin to person A pointing towards person B referencing other variables",
+    "Would you translate this sentence into Hindi In C programming pointers are akin to person A pointing towards person B referencing other variables",
+]
+
+translations = [extract_translation_info(sentence) for sentence in sentences]
+
+for index, translation in enumerate(translations):
+    print(f"Example {index + 1}:")
+    print(f"  Command: {translation['command']}")
+    print(f"  Target Language: {translation['language']}")
+    print(f"  Text to Translate: {translation['text_to_translate']}")
