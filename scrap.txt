@@ -1,0 +1,38 @@
+def lang_selection(input):
+    selector = {
+        1:"mr",
+        2:"hi",
+        3:"en",
+    }
+    return selector.get(input, "None")
+
+def speech_lang_selection(input):
+    selector = {
+        1:"mr-in",
+        2:"hi-in",
+        3:"en-in",
+    }
+    return selector.get(input, "None")
+
+
+
+# Testing examples
+# sentences = [
+#     "Please translate this sentence into Hindi In C language pointers serve as references to other variables, akin to person A pointing to person B",
+#     "Translate this sentence into Hindi Pointers in C language function as references to other variables, much like person A indicating person B",
+#     "Could you translate this sentence into Hindi Pointers within C programming act as references to other variables resembling person A gesturing towards person B",
+#     "I'd like this sentence translated into Hindi The pointers in C language represent references to other variables similar to person A pointing towards person B",
+#     "Kindly translate this sentence into Hindi Pointers in C resemble person A pointing to person B as they reference other variables",
+#     "Translate I am going to school into French",
+#     "Translate Hello to Hindi",
+#     "Please do translation of following sentence into hindi In Chekki programming pointers are akin to person A pointing towards person B referencing other variables",
+#     "Would you translate this sentence into Hindi In C programming pointers are akin to person A pointing towards person B referencing other variables",
+# ]
+
+# translations = [extract_translation_info(sentence) for sentence in sentences]
+
+# for index, translation in enumerate(translations):
+#     print(f"Example {index + 1}:")
+#     print(f"  Command: {translation['command']}")
+#     print(f"  Target Language: {translation['language']}")
+#     print(f"  Text to Translate: {translation['text_to_translate']}")
