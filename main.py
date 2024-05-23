@@ -18,7 +18,10 @@ import googletrans
 from gtts import gTTS
 from tempfile import NamedTemporaryFile
 from playsound import playsound
+
 translator = googletrans.Translator()
+
+from speech_indexing import extract_translation_info
 
 def recordInput(src_lang):
     r = sr.Recognizer()
@@ -32,7 +35,8 @@ def recordInput(src_lang):
         # speak recognizing
         text = r.recognize_google(audio, language = src_lang)
         print(f"Input: {text}")
-        return text
+        nlp_op = extract_translation_info(text)
+        return nlp_op
     
     except Exception as e:
         # speak say that again please
@@ -50,35 +54,14 @@ def speak(text, tgt_lang):
     tts.save('./speech.mp3')
     playsound('./speech.mp3')
 
-def lang_selection(input):
-    selector = {
-        1:"mr",
-        2:"hi",
-        3:"en",
-    }
-    return selector.get(input, "None")
-
-def speech_lang_selection(input):
-    selector = {
-        1:"mr-in",
-        2:"hi-in",
-        3:"en-in",
-    }
-    return selector.get(input, "None")
-
 if __name__ == "__main__":
     
-    src_lang = int(input("Enter Source Language: \n1. Marathi\n2. Hindi\n3. English\n"))
-    tgt_lang = int(input("Enter Translation Language: \n1. Marathi\n2. Hindi\n3. English\n"))
-    
+        conv2keyword = {"Hindi":"hi"}
 
-    if src_lang == "None" or tgt_lang == "None":
-        # speak
-        print("Please Select Valid Option")
-    else:
-        src_lang = speech_lang_selection(src_lang)
-        tgt_lang = lang_selection(tgt_lang)
-        print(src_lang, tgt_lang)
-        text = recordInput(src_lang)
-        tgt_out = translateText(text, tgt_lang)
-        speak(tgt_out, tgt_lang)
+        nlp_op = recordInput("en-in")
+        if(nlp_op["language"] in conv2keyword):
+            print("en-in", conv2keyword[nlp_op["language"]])
+            tgt_out = translateText(nlp_op["text_to_translate"], conv2keyword[nlp_op["language"]])
+            speak(tgt_out, conv2keyword[nlp_op["language"]])
+        else:
+            print("Something went wrong please try again")
