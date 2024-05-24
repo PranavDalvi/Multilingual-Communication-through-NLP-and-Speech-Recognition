@@ -11,9 +11,9 @@ def detect_language(text):
     return None
 
 def clean_text(text, language):
-    text = re.sub(rf'\b(?:translate|convert|translation)\b.*\b(into|to)\s+{language}\b', '', text, flags=re.IGNORECASE)
-    text = re.sub(rf'\b(into|to)\s+{language}\b', '', text, flags=re.IGNORECASE)
-    text = re.sub(r'\b(this sentence|of following sentence)\b', '', text, flags=re.IGNORECASE)
+    text = re.sub(rf"\b(?:translate|convert|translation)\b.*\b(into|to)\s+{language}\b", "", text, flags=re.IGNORECASE)
+    text = re.sub(rf"\b(into|to)\s+{language}\b", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b(this sentence|of following sentence)\b", "", text, flags=re.IGNORECASE)
     return text
 
 def extract_translation_info(sentence):
@@ -31,12 +31,12 @@ def extract_translation_info(sentence):
         for token in doc[translate_index + 1:]:
             text_to_translate += token.text + " "
     else:
-        text_to_translate = ''
+        text_to_translate = ""
 
     text_to_translate = clean_text(text_to_translate, language)
 
     return {
-        'translate_index' : translate_index,
-        'language': language,
-        'text_to_translate': text_to_translate.strip()
+        "translate_index" : translate_index,
+        "language": language,
+        "text_to_translate": text_to_translate.strip()
     }
