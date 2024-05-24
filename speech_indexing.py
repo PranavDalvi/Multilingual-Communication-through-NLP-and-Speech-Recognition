@@ -7,7 +7,7 @@ def detect_language(text):
     supported_languages = ["marathi", "hindi"]
     for language in supported_languages:
         if language in text.lower():
-            return language.capitalize()
+            return language.lower()
     return None
 
 def clean_text(text, language):
