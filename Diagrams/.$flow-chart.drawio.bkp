@@ -1,0 +1,69 @@
+<mxfile host="Electron" modified="2024-05-25T03:42:38.706Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.2.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="2yZwF53LFDphWP1gnPo7" version="24.2.5" type="device">
+  <diagram name="Page-1" id="3oECRVs9FXXwJbp_gHhL">
+    <mxGraphModel dx="1591" dy="941" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="kSgp659HOOLKuzvzk9Ju-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="kSgp659HOOLKuzvzk9Ju-1" target="kSgp659HOOLKuzvzk9Ju-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kSgp659HOOLKuzvzk9Ju-1" value="Start" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="375" y="20" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="kSgp659HOOLKuzvzk9Ju-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="kSgp659HOOLKuzvzk9Ju-2" target="kSgp659HOOLKuzvzk9Ju-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kSgp659HOOLKuzvzk9Ju-2" value="Record Input" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
+          <mxGeometry x="295" y="120" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="kSgp659HOOLKuzvzk9Ju-4" value="Input is sent to&amp;nbsp;&lt;b&gt;extract_translation_info &lt;/b&gt;(speech_indexing.py)" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="298" y="220" width="255" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="kSgp659HOOLKuzvzk9Ju-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="kSgp659HOOLKuzvzk9Ju-5" target="kSgp659HOOLKuzvzk9Ju-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kSgp659HOOLKuzvzk9Ju-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="kSgp659HOOLKuzvzk9Ju-5" target="kSgp659HOOLKuzvzk9Ju-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="660" y="390" />
+              <mxPoint x="660" y="120" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kSgp659HOOLKuzvzk9Ju-5" value="Does input contains Translate key word?" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.decision;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="353" y="320" width="145" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="kSgp659HOOLKuzvzk9Ju-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="kSgp659HOOLKuzvzk9Ju-6" target="kSgp659HOOLKuzvzk9Ju-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kSgp659HOOLKuzvzk9Ju-6" value="Extract sentence to be translated &amp;amp; in which languate from input and send back to &lt;b&gt;main.py&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="298" y="497" width="255" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="kSgp659HOOLKuzvzk9Ju-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="kSgp659HOOLKuzvzk9Ju-8" target="kSgp659HOOLKuzvzk9Ju-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kSgp659HOOLKuzvzk9Ju-8" value="Send data to translate API to translate the sentence" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="298" y="610" width="255" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="kSgp659HOOLKuzvzk9Ju-9" value="Use text-to-speech" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="298" y="720" width="255" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="kSgp659HOOLKuzvzk9Ju-10" value="End" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="376" y="850" width="99" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="kSgp659HOOLKuzvzk9Ju-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="kSgp659HOOLKuzvzk9Ju-4" target="kSgp659HOOLKuzvzk9Ju-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kSgp659HOOLKuzvzk9Ju-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="kSgp659HOOLKuzvzk9Ju-9" target="kSgp659HOOLKuzvzk9Ju-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kSgp659HOOLKuzvzk9Ju-20" value="No" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="510" y="360" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="kSgp659HOOLKuzvzk9Ju-21" value="Yes" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="425" y="458" width="40" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
