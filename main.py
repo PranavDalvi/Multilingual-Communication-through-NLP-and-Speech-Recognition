@@ -18,24 +18,27 @@ import googletrans
 from gtts import gTTS
 from tempfile import NamedTemporaryFile
 from playsound import playsound
+import subprocess
+import time
 
 translator = googletrans.Translator()
 
 from speech_indexing import extract_translation_info
 
-def recordInput(src_lang):
+def recordInput(src_lang, supported_languages):
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        # speak listening
+        print('listening')
         r.pause_threshold = 1
         r.adjust_for_ambient_noise(source)
+        playsound('./audio_files/listening.mp3')
         audio = r.listen(source)
 
     try:
         # speak recognizing
         text = r.recognize_google(audio, language = src_lang)
         print(f"Input: {text}")
-        nlp_op = extract_translation_info(text)
+        nlp_op = extract_translation_info(text, supported_languages)
         return nlp_op
     
     except Exception as e:
@@ -52,16 +55,29 @@ def translateText(text, tgt_lang):
 def speak(text, tgt_lang):
     tts = gTTS(text=text, lang=tgt_lang)
     tts.save('./speech.mp3')
+    time.sleep(4) # Depends on the system's performance
     playsound('./speech.mp3')
+
+def process():
+    pass
 
 if __name__ == "__main__":
     
-        conv2keyword = {"Hindi":"hi"}
+        supported_languages = {"hindi":"hi", "marathi":"mr", "gujarati":"gu", "Kannada": "kn", "Malayalam":"ml", "Spanish":"es", }
 
-        nlp_op = recordInput("en-in")
-        if(nlp_op["language"] in conv2keyword):
-            print("en-in", conv2keyword[nlp_op["language"]])
-            tgt_out = translateText(nlp_op["text_to_translate"], conv2keyword[nlp_op["language"]])
-            speak(tgt_out, conv2keyword[nlp_op["language"]])
+        nlp_op = recordInput("en-in", supported_languages)
+        print (nlp_op)
+        if nlp_op["translate_index"] != None:
+            if(nlp_op["language"] in supported_languages):
+                print("en-in", supported_languages[nlp_op["language"]])
+                tgt_out = translateText(nlp_op["text_to_translate"], supported_languages[nlp_op["language"]])
+                speak(tgt_out, supported_languages[nlp_op["language"]])
+            else:
+                print('Try Saying "Translate I am going to school in Hindi"')
+                playsound('./audio_files/error1.mp3')
+                playsound('./audio_files/suggestion1.mp3')
+
         else:
-            print("Something went wrong please try again")
+            print('Try Saying "Translate I am going to school in Hindi"')
+            playsound('./audio_files/error1.mp3')
+            playsound('./audio_files/suggestion1.mp3')

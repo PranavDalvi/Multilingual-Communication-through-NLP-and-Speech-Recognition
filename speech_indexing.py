@@ -3,11 +3,11 @@ import re
 nlp = spacy.load("en_core_web_sm")
 
 
-def detect_language(text):
-    supported_languages = ["marathi", "hindi"]
-    for language in supported_languages:
-        if language in text.lower():
-            return language.lower()
+def detect_language(text, supported_languages):
+    for key, value  in supported_languages.items():
+        print(f"Key: {key}")
+        if key in text.lower():
+            return key.lower()
     return None
 
 def clean_text(text, language):
@@ -16,7 +16,7 @@ def clean_text(text, language):
     text = re.sub(r"\b(this sentence|of following sentence)\b", "", text, flags=re.IGNORECASE)
     return text
 
-def extract_translation_info(sentence):
+def extract_translation_info(sentence, supported_languages):
     doc = nlp(sentence)
     translate_index = None
     for token in doc:
@@ -24,8 +24,7 @@ def extract_translation_info(sentence):
             translate_index = token.i
             break
 
-
-    language = detect_language(sentence)
+    language = detect_language(sentence, supported_languages)
     if translate_index is not None and translate_index + 1 < len(doc):
         text_to_translate = ""
         for token in doc[translate_index + 1:]:
