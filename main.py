@@ -63,7 +63,7 @@ def process():
 
 if __name__ == "__main__":
     
-        supported_languages = {"hindi":"hi", "marathi":"mr", "gujarati":"gu", "Kannada": "kn", "Malayalam":"ml", "Spanish":"es", }
+        supported_languages = {"hindi":"hi", "marathi":"mr", "gujarati":"gu", "kannada": "kn", "malayalam":"ml", "spanish":"es", }
 
         nlp_op = recordInput("en-in", supported_languages)
         print (nlp_op)
