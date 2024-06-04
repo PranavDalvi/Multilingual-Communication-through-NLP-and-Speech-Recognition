@@ -11,8 +11,8 @@ def detect_language(text, supported_languages):
     return None
 
 def clean_text(text, language):
-    text = re.sub(rf"\b(?:translate|convert|translation)\b.*\b(into|to)\s+{language}\b", "", text, flags=re.IGNORECASE)
-    text = re.sub(rf"\b(into|to)\s+{language}\b", "", text, flags=re.IGNORECASE)
+    text = re.sub(rf"\b(?:translate|convert|translation)\b.*\b(into|to|in)\s+{language}\b", "", text, flags=re.IGNORECASE)
+    text = re.sub(rf"\b(into|to|in)\s+{language}\b", "", text, flags=re.IGNORECASE)
     text = re.sub(r"\b(this sentence|of following sentence)\b", "", text, flags=re.IGNORECASE)
     return text
 
